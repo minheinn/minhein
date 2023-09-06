@@ -1,0 +1,36 @@
+{% extends 'dashboard/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active">About</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+    <form action="" method="post">
+         {% csrf_token %}
+         <div class="row">
+            <div class="col-md-6">
+                {{ forms.name|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ forms.birthday|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ forms.email|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ forms.phone|as_crispy_field }}
+            </div>
+         </div>
+         {{ forms.address|as_crispy_field }}
+         {{ forms.description|as_crispy_field }}
+
+         <button type="submit" class="btn btn-primary btn-sm">Create</button>
+         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+    </form>
+{% endblock content %}
