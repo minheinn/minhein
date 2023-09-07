@@ -11,6 +11,16 @@
     </nav>
   </div>
   <!-- End Page Title -->
+
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      <strong>Message : </strong>{{ message }}.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+
+
+  {% if not about %}
     <form action="" method="post">
          {% csrf_token %}
          <div class="row">
@@ -31,6 +41,29 @@
          {{ forms.description|as_crispy_field }}
 
          <button type="submit" class="btn btn-primary btn-sm">Create</button>
-         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
     </form>
+  {% else %}
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6">
+            {{ forms.name|as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+            {{ forms.birthday|as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+            {{ forms.email|as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+            {{ forms.phone|as_crispy_field }}
+        </div>
+      </div>
+      {{ forms.address|as_crispy_field }}
+      {{ forms.description|as_crispy_field }}
+
+      <button type="submit" class="btn btn-primary btn-sm">Update</button>
+      <a href="{% url 'about_delete' about.id %}" class="btn btn-danger btn-sm">Delete</a>
+    </form>
+  {% endif %}
 {% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'dashboard/main.html' %}
+{% block content %}
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active">About</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+    <p>Delete</p>
+    <h3>Are your Sure, You want to Delete? <strong><i>Data for {{about.name}}</i></strong></h3>
+    <form action="" method="post">
+        {% csrf_token %}
+        <a href="{% url 'about' %}" class="btn btn-primary btn-sm">Cancel</a>
+        <button type="submit" class="btn btn-danger btn-sm">Confirm</button>
+    </form>
+{% endblock content %}
