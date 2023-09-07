@@ -38,6 +38,7 @@
             </div>
          </div>
          {{ forms.address|as_crispy_field }}
+         {{forms.media}}
          {{ forms.description|as_crispy_field }}
 
          <button type="submit" class="btn btn-primary btn-sm">Create</button>
@@ -60,6 +61,7 @@
         </div>
       </div>
       {{ forms.address|as_crispy_field }}
+      {{forms.media}}
       {{ forms.description|as_crispy_field }}
 
       <button type="submit" class="btn btn-primary btn-sm">Update</button>
