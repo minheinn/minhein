@@ -32,8 +32,8 @@ def about(request):
         context = {'about':about, 'forms':forms}
         return render(request, 'dashboard/about/about.html', context)    
 
-def aboutDelete(request, pk):
-    about = About.objects.latest('id')
+def aboutDelete(request, slug):
+    about = About.objects.latest('slug')
     if request.method == "POST":
         about.delete()
         messages.error(request, 'About {} has been deleted successfully!'.format(about.name))
@@ -55,9 +55,9 @@ def type_writer(request):
     context = {'page':page, 'type_writers':type_writers, 'forms':forms}
     return render(request, 'dashboard/type_writer/type_writer.html', context)
 
-def type_writer_edit(request, pk):
+def type_writer_edit(request, slug):
     type_writers = TypeWriter.objects.all()
-    type_writer = TypeWriter.objects.get(id=pk)
+    type_writer = TypeWriter.objects.get(slug=slug)
     forms = TypeWriterForm(instance=type_writer)
     if request.method == "POST":
         form = TypeWriterForm(request.POST, instance=type_writer)
@@ -68,8 +68,8 @@ def type_writer_edit(request, pk):
     context = {'type_writers':type_writers, 'type_writer':type_writer, 'forms':forms}
     return render(request, 'dashboard/type_writer/type_writer.html', context)
 
-def type_writer_delete(request, pk):
-    type_writer = TypeWriter.objects.get(id=pk)
+def type_writer_delete(request, slug):
+    type_writer = TypeWriter.objects.get(slug=slug)
     if request.method == "POST":
         type_writer.delete()
         messages.error(request, '{} has been deleted successfully!'.format(type_writer.text))

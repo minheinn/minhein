@@ -30,10 +30,10 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ i.text }}</td>
                     <td>
-                        <a href="{% url 'type-writer-edit' i.pk %}" class="btn btn-primary btn-sm">
+                        <a href="{% url 'type-writer-edit' i.slug %}" class="btn btn-primary btn-sm">
                             <i class="bi bi-pencil"></i> Edit
                         </a>
-                        <a href="{% url 'type-writer-delete' i.pk %}" class="btn btn-danger btn-sm">
+                        <a href="{% url 'type-writer-delete' i.slug %}" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i> Delete
                         </a>
                     </td>
