@@ -16,7 +16,7 @@ def about(request):
             form = AboutForm(request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'About {} has been added successfully!'.format(about.name))
+                messages.success(request, 'About Has been added successfully!')
                 return redirect('about')
         context = {'forms':forms, 'about':about}
         return render(request, 'dashboard/about/about.html', context)
@@ -50,6 +50,7 @@ def type_writer(request):
         form = TypeWriterForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Has been added successfully!')
             return redirect('type-writer')
     context = {'page':page, 'type_writers':type_writers, 'forms':forms}
     return render(request, 'dashboard/type_writer/type_writer.html', context)
@@ -62,6 +63,7 @@ def type_writer_edit(request, pk):
         form = TypeWriterForm(request.POST, instance=type_writer)
         if form.is_valid():
             form.save()
+            messages.success(request, '{} has been updated successfully!'.format(type_writer.text))
             return redirect('type-writer')
     context = {'type_writers':type_writers, 'type_writer':type_writer, 'forms':forms}
     return render(request, 'dashboard/type_writer/type_writer.html', context)
@@ -70,6 +72,7 @@ def type_writer_delete(request, pk):
     type_writer = TypeWriter.objects.get(id=pk)
     if request.method == "POST":
         type_writer.delete()
+        messages.error(request, '{} has been deleted successfully!'.format(type_writer.text))
         return redirect('type-writer')
     context = {'type_writer':type_writer}
     return render(request, 'dashboard/type_writer/delete.html', context)
