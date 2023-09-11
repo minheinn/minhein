@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from . models import About
-from . forms import AboutForm
+from . models import About, TypeWriter
+from . forms import AboutForm, TypeWriterForm
 from django.contrib import messages
 
 # Create your views here.
@@ -40,3 +40,37 @@ def aboutDelete(request, pk):
         return redirect('about')
     context = {'about':about}
     return render(request, 'dashboard/about/delete.html', context)
+
+## type_writer started
+def type_writer(request):
+    page = "type_writer"
+    type_writers = TypeWriter.objects.all()
+    forms = TypeWriterForm()
+    if request.method == "POST":
+        form = TypeWriterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('type-writer')
+    context = {'page':page, 'type_writers':type_writers, 'forms':forms}
+    return render(request, 'dashboard/type_writer/type_writer.html', context)
+
+def type_writer_edit(request, pk):
+    type_writers = TypeWriter.objects.all()
+    type_writer = TypeWriter.objects.get(id=pk)
+    forms = TypeWriterForm(instance=type_writer)
+    if request.method == "POST":
+        form = TypeWriterForm(request.POST, instance=type_writer)
+        if form.is_valid():
+            form.save()
+            return redirect('type-writer')
+    context = {'type_writers':type_writers, 'type_writer':type_writer, 'forms':forms}
+    return render(request, 'dashboard/type_writer/type_writer.html', context)
+
+def type_writer_delete(request, pk):
+    type_writer = TypeWriter.objects.get(id=pk)
+    if request.method == "POST":
+        type_writer.delete()
+        return redirect('type-writer')
+    context = {'type_writer':type_writer}
+    return render(request, 'dashboard/type_writer/delete.html', context)
+

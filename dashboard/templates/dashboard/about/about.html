@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="pagetitle">
-    <h1>Dashboard</h1>
+    <h1>Type Writer</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
@@ -41,7 +41,8 @@
          {{forms.media}}
          {{ forms.description|as_crispy_field }}
 
-         <button type="submit" class="btn btn-primary btn-sm">Create</button>
+         <button type="submit" class="btn btn-primary btn-sm">
+          <i class="bi bi-plus-circle"></i> Create</button>
     </form>
   {% else %}
     <form action="" method="post">
@@ -64,8 +65,11 @@
       {{forms.media}}
       {{ forms.description|as_crispy_field }}
 
-      <button type="submit" class="btn btn-primary btn-sm">Update</button>
-      <a href="{% url 'about_delete' about.id %}" class="btn btn-danger btn-sm">Delete</a>
+      <button type="submit" class="btn btn-primary btn-sm">
+        <i class="bi bi-pencil"></i> Update
+      </button>
+      <a href="{% url 'about_delete' about.id %}" class="btn btn-danger btn-sm">
+        <i class="bi bi-trash"></i> Delete</a>
     </form>
   {% endif %}
 {% endblock content %}

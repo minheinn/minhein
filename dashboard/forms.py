@@ -1,5 +1,5 @@
 from django import forms
-from . models import About
+from . models import About, TypeWriter
 
 class AboutForm(forms.ModelForm):
     class Meta:
@@ -12,4 +12,12 @@ class AboutForm(forms.ModelForm):
             'phone':forms.TextInput(attrs=({'placeholder':'Enter Your Phone..'})),
             'address':forms.TextInput(attrs=({'placeholder':'Enter Your Address..'})),
             'description':forms.Textarea(attrs=({'placeholder':'Enter Your Description..'})),
+        }
+
+class TypeWriterForm(forms.ModelForm):
+    class Meta:
+        model = TypeWriter
+        fields = "__all__"
+        widgets = {
+            'text':forms.TextInput(attrs=({'placeholder':'Write one Text..'})),
         }

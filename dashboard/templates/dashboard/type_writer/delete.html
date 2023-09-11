@@ -1,24 +1,25 @@
 {% extends 'dashboard/main.html' %}
 {% block content %}
 <div class="pagetitle">
-    <h1>Dashboard</h1>
+    <h1>Type Writer</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
-        <li class="breadcrumb-item active">About</li>
+        <li class="breadcrumb-item active">Type Writer</li>
       </ol>
     </nav>
-  </div>
+</div>
   <!-- End Page Title -->
-    <p>Delete</p>
-    <h3>Are your Sure, You want to Delete? <strong><i>Data for {{about.name}}</i></strong></h3>
+    
+  <p>Delete</p>
+    <h3>Are your Sure, You want to Delete? <strong><i>{{type_writer.text}}</i></strong></h3>
     <form action="" method="post">
         {% csrf_token %}
-        <a href="{% url 'about' %}" class="btn btn-primary btn-sm">
-          <i class="bi bi-x-circle"></i> Cancel
+        <a href="{% url 'type-writer' %}" class="btn btn-primary btn-sm">
+            <i class="bi bi-x-circle"></i> Cancel
         </a>
         <button type="submit" class="btn btn-danger btn-sm">
-          <i class="bi bi-check-circle"></i> Confirm
+            <i class="bi bi-check-circle"></i> Confirm
         </button>
     </form>
 {% endblock content %}
