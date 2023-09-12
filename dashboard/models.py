@@ -53,3 +53,22 @@ class TypeWriter(models.Model):
 def __str__(self):
     return self.text
 
+class Skill(models.Model):
+    skill = models.CharField(max_length=50, null=True)
+    percent = models.IntegerField(null=True)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=255, null=False,blank=True,unique=True,editable=False,)
+
+    def save(self, *args, **kwargs):
+        if not self.slug: # If the slug is not set
+            self.slug = unique_slugify(self,slugify(self.skill,allow_unicode=True)) # Generate the slug from the title
+        else:
+            new_slug = unique_slugify(self,slugify(self.skill,allow_unicode=True))
+            if self.slug != new_slug: # Check if the title has changed
+                self.slug = new_slug # Update the slug with the new value
+        super().save(*args, **kwargs) # Call the parent save method
+
+    def __str__(self):
+        return self.skill
+

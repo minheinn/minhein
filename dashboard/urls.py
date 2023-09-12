@@ -12,4 +12,9 @@ urlpatterns = [
     path('type_writer/', views.type_writer, name="type-writer"),
     path('type_writer/<slug:slug>/edit/', views.type_writer_edit, name="type-writer-edit"),
     path('type_writer/<slug:slug>/delete/', views.type_writer_delete, name="type-writer-delete"),
+
+    ## skill
+    path('skill/', views.skill, name='skill'),
+    path('skill/<slug:slug>/edit', views.skill_edit, name='skill-edit'),
+    path('skill/<slug:slug>/delete', views.skill_delete, name='skill-delete'),
 ]

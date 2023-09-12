@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from . models import About, TypeWriter
-from . forms import AboutForm, TypeWriterForm
+from . models import *
+from . forms import *
 from django.contrib import messages
 
 # Create your views here.
@@ -76,4 +76,42 @@ def type_writer_delete(request, slug):
         return redirect('type-writer')
     context = {'type_writer':type_writer}
     return render(request, 'dashboard/type_writer/delete.html', context)
+
+## type_writer end ##
+
+## skill started ##
+def skill(request):
+    page = 'skill'
+    skills = Skill.objects.all()
+    forms = SkillForm()
+    if request.method == "POST":
+        form = SkillForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('skill')
+    context = {'page':page,'skills':skills, 'forms':forms}
+    return render(request, 'dashboard/skill/skill.html', context)
+
+def skill_edit(request, slug):
+    skills = Skill.objects.all()
+    skill = Skill.objects.get(slug=slug)
+    forms = SkillForm(instance=skill)
+    if request.method == "POST":
+        form = SkillForm(request.POST, instance=skill)
+        if form.is_valid():
+            form.save()
+            return redirect('skill')
+    context = {'skills':skills, 'skill':skill, 'forms':forms}
+    return render(request, 'dashboard/skill/skill.html', context)
+
+def skill_delete(request, slug):
+    skill = Skill.objects.get(slug=slug)
+    if request.method == "POST":
+        skill.delete()
+        return redirect('skill')
+    context = {'skill':skill}
+    return render(request, 'dashboard/skill/delete.html', context)
+## skill ended ##
+
+
 
