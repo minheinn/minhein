@@ -88,6 +88,7 @@ def skill(request):
         form = SkillForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Has been added successfully!')
             return redirect('skill')
     context = {'page':page,'skills':skills, 'forms':forms}
     return render(request, 'dashboard/skill/skill.html', context)
@@ -100,6 +101,7 @@ def skill_edit(request, slug):
         form = SkillForm(request.POST, instance=skill)
         if form.is_valid():
             form.save()
+            messages.success(request, '{} has been updated successfully!'.format(skill.skill))
             return redirect('skill')
     context = {'skills':skills, 'skill':skill, 'forms':forms}
     return render(request, 'dashboard/skill/skill.html', context)
@@ -108,6 +110,7 @@ def skill_delete(request, slug):
     skill = Skill.objects.get(slug=slug)
     if request.method == "POST":
         skill.delete()
+        messages.error(request, '{} has been deleted successfully!'.format(skill.skill))
         return redirect('skill')
     context = {'skill':skill}
     return render(request, 'dashboard/skill/delete.html', context)
