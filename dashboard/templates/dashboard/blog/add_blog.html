@@ -1,0 +1,28 @@
+{% extends "dashboard/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="pagetitle">
+    <h1>Blog</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active">blog / add</li>
+      </ol>
+    </nav>
+</div>
+  <!-- End Page Title -->
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ forms.title|as_crispy_field }}
+    {{ forms.image|as_crispy_field }}
+    {{forms.media}}
+    {{ forms.description|as_crispy_field }} 
+
+    <a href="{% url 'blog' %}" class="btn btn-secondary btn-sm text-white">
+        <i class="bi bi-arrow-left-circle"></i> Back
+    </a>
+    <button type="submit" class="btn btn-primary btn-sm">
+        <i class="bi bi-plus-circle"></i> Add Post
+    </button>
+</form>
+{% endblock content %}

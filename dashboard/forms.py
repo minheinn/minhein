@@ -30,3 +30,13 @@ class SkillForm(forms.ModelForm):
             'skill':forms.TextInput(attrs=({'placeholder':'Write Your Skill..'})),
             'percent':forms.NumberInput(attrs=({'placeholder':"Write Your Skill Percents.."})),
         }
+
+class BlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = "__all__"
+        widgets = {
+            'title':forms.TextInput(attrs=({'placeholder':'Write Title'})),
+            'image':forms.FileInput(attrs=({'placeholder':'Choose Image'})),
+            'description':forms.Textarea(attrs=({'placeholder':'Write Description'})),
+        }

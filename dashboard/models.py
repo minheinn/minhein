@@ -71,4 +71,25 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.skill
+    
+### Blogs ###
+class Blog(models.Model):
+    title = models.CharField(max_length=255, null=True)
+    image = models.ImageField(upload_to="blog-photos", null=True)
+    description = RichTextUploadingField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=255, null=False,blank=True,unique=True,editable=False,)
+
+    def save(self, *args, **kwargs):
+        if not self.slug: # If the slug is not set
+            self.slug = unique_slugify(self,slugify(self.title,allow_unicode=True)) # Generate the slug from the title
+        else:
+            new_slug = unique_slugify(self,slugify(self.title,allow_unicode=True))
+            if self.slug != new_slug: # Check if the title has changed
+                self.slug = new_slug # Update the slug with the new value
+        super().save(*args, **kwargs) # Call the parent save method
+
+    def __str__(self):
+        return self.title
 

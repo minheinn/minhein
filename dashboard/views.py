@@ -116,5 +116,43 @@ def skill_delete(request, slug):
     return render(request, 'dashboard/skill/delete.html', context)
 ## skill ended ##
 
+### blog started ###
+def blog(request):
+    blogs = Blog.objects.all()
+    context = {'blogs':blogs}
+    return render(request, 'dashboard/blog/blog.html', context)
+
+def blog_add(request):
+    forms = BlogForm()
+    if request.method == "POST":
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Has been added successfully!')
+            return redirect('blog')
+    context = {'forms':forms}
+    return render(request, 'dashboard/blog/add_blog.html', context)
+
+def blog_edit(request, slug):
+    blog = Blog.objects.get(slug=slug)
+    forms = BlogForm(instance=blog)
+    if request.method == "POST":
+        form = BlogForm(request.POST, request.FILES, instance=blog)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '{} has been updated successfully!'.format(blog.title))
+            return redirect('blog')
+    context = {'blog':blog, 'forms':forms}
+    return render(request, 'dashboard/blog/edit_blog.html', context)
+
+def blog_delete(request, slug):
+    blog = Blog.objects.get(slug=slug)
+    if request.method == "POST":
+        blog.delete()
+        messages.error(request, '{} has been deleted successfully!'.format(blog.title))
+        return redirect('blog')
+    context = {'blog':blog}
+    return render(request, 'dashboard/blog/delete.html', context)
+
 
 
