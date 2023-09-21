@@ -13,7 +13,7 @@ def about(request):
     about = About.objects.first()
     if not about:
         if request.method == "POST":
-            form = AboutForm(request.POST)
+            form = AboutForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 messages.success(request, 'About Has been added successfully!')
@@ -24,7 +24,7 @@ def about(request):
         about = About.objects.latest('id')
         forms = AboutForm(instance=about)
         if request.method == "POST":
-            form = AboutForm(request.POST, instance=about)
+            form = AboutForm(request.POST, request.FILES, instance=about)
             if form.is_valid():
                 form.save()
                 messages.success(request, 'About {} has been updated successfully!'.format(about.name))

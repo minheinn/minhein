@@ -19,6 +19,7 @@ class About(models.Model):
     phone = models.CharField(max_length=15, null=True, blank=True)
     address = models.CharField(max_length=200, null=True)
     description = RichTextUploadingField(null=True, blank=True)
+    image = models.ImageField(upload_to="about_image/", null=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=255, null=False,blank=True,unique=True,editable=False,)

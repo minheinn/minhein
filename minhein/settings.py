@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #new
+    'frontend',
     'dashboard',
     'ckeditor',
     'ckeditor_uploader',

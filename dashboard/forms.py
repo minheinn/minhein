@@ -12,6 +12,7 @@ class AboutForm(forms.ModelForm):
             'phone':forms.TextInput(attrs=({'placeholder':'Enter Your Phone..'})),
             'address':forms.TextInput(attrs=({'placeholder':'Enter Your Address..'})),
             'description':forms.Textarea(attrs=({'placeholder':'Enter Your Description..'})),
+            'image':forms.FileInput(attrs={'id': 'imageInput','type':'file'}),
         }
 
 class TypeWriterForm(forms.ModelForm):

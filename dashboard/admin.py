@@ -3,7 +3,7 @@ from . models import About, TypeWriter, Skill, Blog
 
 # Register your models here.
 class aboutAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'email', 'birthday']
+    list_display = ['id', 'name', 'email', 'birthday', 'image']
 admin.site.register(About, aboutAdmin)
 
 class TypeWriterAdmin(admin.ModelAdmin):
