@@ -274,37 +274,41 @@
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link " href="{% url 'dashboard' %}">
+      {% url 'dashboard' as url %}
+      <li class="nav-item {% if request.path == url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'dashboard' %}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'about' %}">
+      {% url 'about' as url %}
+      <li class="nav-item {% if request.path == url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'about' %}">
           <i class="bi bi-file-earmark-person"></i>
           <span>About</span>
         </a>
       </li><!-- End About Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'type-writer' %}">
+      {% url 'type-writer' as url %}
+      <li class="nav-item {% if request.path == url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'type-writer' %}">
           <i class="bi bi-file-text"></i>
           <span>Type Writer</span>
         </a>
       </li><!-- End Type Writer Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'skill' %}">
+      {% url 'skill' as url %}
+      <li class="nav-item {% if request.path == url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'skill' %}">
           <i class="bi bi-wrench-adjustable-circle"></i>
           <span>Skill</span>
         </a>
       </li><!-- End Skill nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'blog' %}">
+      {% url 'blog' as url %} 
+      <li class="nav-item {% if request.path == url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'blog' %}">
           <i class="bi bi-justify"></i>
           <span>Blog</span>
         </a>

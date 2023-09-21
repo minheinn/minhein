@@ -37,6 +37,6 @@ class BlogForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             'title':forms.TextInput(attrs=({'placeholder':'Write Title'})),
-            'image':forms.FileInput(attrs=({'placeholder':'Choose Image'})),
+            'image':forms.FileInput(attrs=({"placeholder":"Image", "id":"image", "onchange":"getImagePreview(event)"})),
             'description':forms.Textarea(attrs=({'placeholder':'Write Description'})),
         }

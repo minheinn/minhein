@@ -6,17 +6,26 @@
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
-        <li class="breadcrumb-item active">blog / add</li>
+        <li class="breadcrumb-item active">Blog / Add</li>
       </ol>
     </nav>
 </div>
   <!-- End Page Title -->
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ forms.title|as_crispy_field }}
-    {{ forms.image|as_crispy_field }}
-    {{forms.media}}
-    {{ forms.description|as_crispy_field }} 
+    <div class="row">
+      <div class="col-md-6">
+        {{ forms.title|as_crispy_field }}
+      </div>
+      <div class="col-md-6">
+        {{ forms.image|as_crispy_field }}
+      </div>
+      <div class="col-md-6"></div>
+      <div class="col-md-6 mb-2" id="preview"></div>
+      {{forms.media}}
+      {{ forms.description|as_crispy_field }} 
+  
+    </div> 
 
     <a href="{% url 'blog' %}" class="btn btn-secondary btn-sm text-white">
         <i class="bi bi-arrow-left-circle"></i> Back
@@ -25,4 +34,20 @@
         <i class="bi bi-plus-circle"></i> Add Post
     </button>
 </form>
+
+
+<script>
+  function getImagePreview(event)
+  {
+      var image = URL.createObjectURL(event.target.files[0]);
+      var imagediv = document.getElementById('preview');
+      var newimg = document.createElement('img');
+      imagediv.innerHTML = '';
+      newimg.src = image;
+      newimg.width = "300";
+      imagediv.appendChild(newimg);
+  }
+</script>
+
+
 {% endblock content %}
