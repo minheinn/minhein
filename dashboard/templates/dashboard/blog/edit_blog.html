@@ -19,9 +19,13 @@
       </div>
       <div class="col-md-6">
         {{ forms.image|as_crispy_field }}
+        {% if blog.image %}
+        <div class="col-md-6 mb-2" id="preview">
+            <img src="{{ blog.image.url }}" alt="image here" style=" width: 300px;">
+        </div>
+        {% endif %}
       </div>
       <div class="col-md-6"></div>
-      <div class="col-md-6 mb-2" id="preview"></div>
       {{forms.media}}
       {{ forms.description|as_crispy_field }} 
   

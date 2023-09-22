@@ -17,57 +17,50 @@
 
 
   {% if not about %}
-    <form action="" method="post" enctype="multipart/form-data">
-         {% csrf_token %}
-         <div class="row">
-            <div class="col-md-6">
-                {{ forms.name|as_crispy_field }}
-            </div>
-            <div class="col-md-6">
-                {{ forms.birthday|as_crispy_field }}
-            </div>
-            <div class="col-md-6">
-                {{ forms.email|as_crispy_field }}
-            </div>
-            <div class="col-md-6">
-                {{ forms.phone|as_crispy_field }}
-            </div>
-            <div class="col-md-6">
-              {{ forms.address|as_crispy_field }}
-            </div>
-            <div class="col-md-6">
-              {{ forms.image|as_crispy_field }}
-            </div>
-         </div>
-         {{forms.media}}
-         {{ forms.description|as_crispy_field }}
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+          {{ forms.name|as_crispy_field }}
+          {{ forms.birthday|as_crispy_field }}
+          {{ forms.email|as_crispy_field }}
+          {{ forms.phone|as_crispy_field }}
+          {{ forms.address|as_crispy_field }}
+      </div>
+      <div class="col-md-6">
+        {{ forms.image|as_crispy_field }}
+        <div class="col-md-6 mb-2" id="preview"></div>
+      </div>
+    </div>
 
-         <button type="submit" class="btn btn-primary btn-sm">
-          <i class="bi bi-plus-circle"></i> Create</button>
-    </form>
+    {{forms.media}}
+    {{ forms.description|as_crispy_field }}
+
+    <button type="submit" class="btn btn-primary btn-sm">
+      <i class="bi bi-plus-circle"></i> Create
+    </button>
+  </form>
   {% else %}
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="row">
         <div class="col-md-6">
             {{ forms.name|as_crispy_field }}
-        </div>
-        <div class="col-md-6">
             {{ forms.birthday|as_crispy_field }}
-        </div>
-        <div class="col-md-6">
             {{ forms.email|as_crispy_field }}
-        </div>
-        <div class="col-md-6">
             {{ forms.phone|as_crispy_field }}
-        </div>
-        <div class="col-md-6">
-          {{ forms.address|as_crispy_field }}
+            {{ forms.address|as_crispy_field }}
         </div>
         <div class="col-md-6">
           {{ forms.image|as_crispy_field }}
+          {% if about.image %}
+          <div class="col-md-6 mb-2" id="preview">
+            <img src="{{ about.image.url }}" alt="image here" style=" width: 500px;">
+          </div>
+          {% endif %}
         </div>
       </div>
+
       {{forms.media}}
       {{ forms.description|as_crispy_field }}
 
@@ -78,4 +71,20 @@
         <i class="bi bi-trash"></i> Delete</a>
     </form>
   {% endif %}
+
+
+  <script>
+    function getImagePreview(event)
+    {
+        var image = URL.createObjectURL(event.target.files[0]);
+        var imagediv = document.getElementById('preview');
+        var newimg = document.createElement('img');
+        imagediv.innerHTML = '';
+        newimg.src = image;
+        newimg.width = "500";
+        imagediv.appendChild(newimg);
+    }
+  </script>
+
+
 {% endblock content %}
