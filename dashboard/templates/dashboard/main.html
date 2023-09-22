@@ -306,6 +306,14 @@
         </a>
       </li><!-- End Skill nav -->
 
+      {% url 'gallery' as url %} 
+      <li class="nav-item {% if request.path == url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'gallery' %}">
+          <i class="bi bi-justify"></i>
+          <span>Gallery</span>
+        </a>
+      </li><!-- End Gallery nav -->
+
       {% url 'blog' as url %} 
       <li class="nav-item {% if request.path == url %}active{% endif %}">
         <a class="nav-link" href="{% url 'blog' %}">

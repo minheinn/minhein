@@ -41,3 +41,11 @@ class BlogForm(forms.ModelForm):
             'image':forms.FileInput(attrs=({"placeholder":"Image", "id":"image", "onchange":"getImagePreview(event)"})),
             'description':forms.Textarea(attrs=({'placeholder':'Write Description'})),
         }
+
+class GalleryForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = "__all__"
+        widgets = {
+            'image':forms.FileInput(attrs=({"placeholder":"Image", "id":"image", "onchange":"getImagePreview(event)"})),
+        }

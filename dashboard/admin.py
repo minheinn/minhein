@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import About, TypeWriter, Skill, Blog
+from . models import About, TypeWriter, Skill, Blog, Gallery
 
 # Register your models here.
 class aboutAdmin(admin.ModelAdmin):
@@ -17,3 +17,7 @@ admin.site.register(Skill, SkillAdmin)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'image', 'description']
 admin.site.register(Blog, BlogAdmin)
+
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'image']
+admin.site.register(Gallery, GalleryAdmin)

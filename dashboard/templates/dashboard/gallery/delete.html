@@ -1,0 +1,45 @@
+{% extends 'dashboard/main.html' %}
+{% block content %}
+<div class="pagetitle">
+    <h1>Gallery</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active">Gallery / Delete</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+    <p>Delete</p>
+    <h3>Are your Sure, You want to Delete? <strong><i>data for {{gallery.image}}</i></strong></h3>
+    <form action="" method="post">
+        {% if gallery.image %}
+            <div class="col-md-6 mb-2" id="preview">
+                <img src="{{ gallery.image.url }}" alt="image here" style=" width: 375px;">
+            </div>
+        {% endif %}
+        {% csrf_token %}
+        <a href="{% url 'gallery' %}" class="btn btn-primary btn-sm">
+          <i class="bi bi-x-circle"></i> Cancel
+        </a>
+        <button type="submit" class="btn btn-danger btn-sm">
+          <i class="bi bi-check-circle"></i> Confirm
+        </button>
+    </form>
+
+
+    <script>
+        function getImagePreview(event)
+        {
+            var image = URL.createObjectURL(event.target.files[0]);
+            var imagediv = document.getElementById('preview');
+            var newimg = document.createElement('img');
+            imagediv.innerHTML = '';
+            newimg.src = image;
+            newimg.width = "375";
+            imagediv.appendChild(newimg);
+        }
+      </script>
+
+
+{% endblock content %}

@@ -93,4 +93,19 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Gallery(models.Model):
+    image = models.ImageField(upload_to="galleries/", null=True)
+    slug = models.SlugField(max_length=255, null=False,blank=True,unique=True,editable=False,)
+
+    def save(self, *args, **kwargs):
+        if not self.slug: # If the slug is not set
+            self.slug = unique_slugify(self,slugify(self.image,allow_unicode=True)) # Generate the slug from the title
+        else:
+            new_slug = unique_slugify(self,slugify(self.image,allow_unicode=True))
+            if self.slug != new_slug: # Check if the title has changed
+                self.slug = new_slug # Update the slug with the new value
+        super().save(*args, **kwargs) # Call the parent save method
+
+    
 

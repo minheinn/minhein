@@ -23,4 +23,9 @@ urlpatterns = [
     path('blog/add/', views.blog_add, name='blog-add'),
     path('blog/<slug:slug>/edit', views.blog_edit, name='blog-edit'),
     path('blog/<slug:slug>/delete', views.blog_delete, name='blog-delete'),
+
+    ## gallery
+    path('gallery/', views.gallery, name="gallery"),
+    path('gallery/<slug:slug>/edit/', views.gallery_edit, name="gallery-edit"),
+    path('gallery/<slug:slug>/delete/', views.gallery_delete, name="gallery-delete"),
 ]

@@ -154,5 +154,38 @@ def blog_delete(request, slug):
     context = {'blog':blog}
     return render(request, 'dashboard/blog/delete.html', context)
 
+## Gallery started
+def gallery(request):
+    page = "gallery"
+    galleries = Gallery.objects.all()
+    forms = GalleryForm()
+    if request.method == "POST":
+        form = GalleryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Has been added successfully!')
+            return redirect('gallery')
+    context = {'page':page, 'galleries':galleries, 'forms':forms}
+    return render(request, 'dashboard/gallery/gallery.html', context)
 
+def gallery_edit(request, slug):
+    galleries = Gallery.objects.all()
+    gallery = Gallery.objects.get(slug=slug)
+    forms = GalleryForm(instance=gallery)
+    if request.method == "POST":
+        form = GalleryForm(request.POST, request.FILES, instance=gallery)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '{} has been updated successfully!'.format(gallery.image))
+            return redirect('gallery')
+    context = {'galleries':galleries, 'gallery':gallery, 'forms':forms,}
+    return render(request, 'dashboard/gallery/gallery.html', context)
 
+def gallery_delete(request, slug):
+    gallery = Gallery.objects.get(slug=slug)
+    if request.method == "POST":
+        gallery.delete()
+        messages.error(request, '{} has been deleted successfully!'.format(gallery.image))
+        return redirect('gallery')
+    context = {'gallery':gallery}
+    return render(request, 'dashboard/gallery/delete.html', context)

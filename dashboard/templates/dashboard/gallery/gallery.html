@@ -1,0 +1,99 @@
+{% extends 'dashboard/main.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Min Hein Zaw - Gallery Page{% endblock title %}
+{% block content %}
+
+<style>
+    .image-thumbail {
+        height: 200px;
+        object-fit: cover;
+    }
+    .list-group-item a {
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+<div class="pagetitle">
+    <h1>Gallery</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active">Gallery</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  {% include 'dashboard/message.html' %}
+
+<div class="row">
+    <div class="col-md-8">
+
+        <div class="row">
+            {% for gallery in galleries %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                            <img src="{{ gallery.image.url }}" class="image-thumbail" alt="...">
+                        <div class="card-body">
+                            <div><small> Category: </small></div>
+                            <div><small> Name: </small></div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'gallery-edit' gallery.slug %}" class="btn btn-outline-dark btn-block btn-sm">Edit</a>
+                            <a href="{% url 'gallery-delete' gallery.slug %}" class="btn btn-outline-dark btn-block btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>                      
+            {% empty %}
+                <h3> No Photoes...</h3>
+            {% endfor %}
+        </div>
+
+    </div>
+    {% if page == "gallery" %}
+        <div class="col-md-4">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ forms.image|as_crispy_field }}
+                <div class="col-md-6 mb-2" id="preview"></div>
+
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="bi bi-plus-circle"></i> Add
+                </button>
+            </form>
+        </div>
+    {% else %}
+        <div class="col-md-4">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ forms.image|as_crispy_field }}
+                {% if gallery.image %}
+                    <div class="col-md-6 mb-2" id="preview">
+                        <img src="{{ gallery.image.url }}" alt="image here" style=" width: 375px;">
+                    </div>
+                {% endif %}
+
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="bi bi-pencil"></i> Update
+                </button>
+            </form>
+        </div>
+    {% endif %}
+</div>
+
+
+<script>
+    function getImagePreview(event)
+    {
+        var image = URL.createObjectURL(event.target.files[0]);
+        var imagediv = document.getElementById('preview');
+        var newimg = document.createElement('img');
+        imagediv.innerHTML = '';
+        newimg.src = image;
+        newimg.width = "375";
+        imagediv.appendChild(newimg);
+    }
+  </script>
+
+{% endblock content %}
