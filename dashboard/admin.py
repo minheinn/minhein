@@ -19,5 +19,5 @@ class BlogAdmin(admin.ModelAdmin):
 admin.site.register(Blog, BlogAdmin)
 
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ['id', 'image']
+    list_display = ['id', 'subject', 'image']
 admin.site.register(Gallery, GalleryAdmin)

@@ -94,7 +94,15 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
     
+## Subjects
+SUBJECT = (
+    ('A','APP'),
+    ('W','WEB'),
+    ('C','CARD'),
+)
+    
 class Gallery(models.Model):
+    subject = models.CharField(max_length=3, choices=SUBJECT, null=True)
     image = models.ImageField(upload_to="galleries/", null=True)
     slug = models.SlugField(max_length=255, null=False,blank=True,unique=True,editable=False,)
 
@@ -107,5 +115,6 @@ class Gallery(models.Model):
                 self.slug = new_slug # Update the slug with the new value
         super().save(*args, **kwargs) # Call the parent save method
 
-    
+    def __str__(self):
+        return str('image')
 

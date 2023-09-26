@@ -36,7 +36,7 @@
                     <div class="card mb-3">
                             <img src="{{ gallery.image.url }}" class="image-thumbail" alt="...">
                         <div class="card-body">
-                            <div><small> Category: </small></div>
+                            <div><small> Category: {{ gallery.get_subject_display }} </small></div>
                             <div><small> Name: </small></div>
                         </div>
                         <div class="card-footer">
@@ -55,6 +55,7 @@
         <div class="col-md-4">
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                {{ forms.subject|as_crispy_field }}
                 {{ forms.image|as_crispy_field }}
                 <div class="col-md-6 mb-2" id="preview"></div>
 
@@ -67,6 +68,7 @@
         <div class="col-md-4">
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                {{ forms.subject|as_crispy_field }}
                 {{ forms.image|as_crispy_field }}
                 {% if gallery.image %}
                     <div class="col-md-6 mb-2" id="preview">
