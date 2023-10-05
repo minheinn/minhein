@@ -14,6 +14,16 @@ class AboutForm(forms.ModelForm):
             'description':forms.Textarea(attrs=({'placeholder':'Enter Your Description..'})),
             'image':forms.FileInput(attrs=({"placeholder":"Image", "id":"image", "onchange":"getImagePreview(event)"})),
         }
+        
+## For Facts
+class FactForm(forms.ModelForm):
+    class Meta:
+        model = Fact
+        fields = "__all__"
+        widgets = {
+            'fact':forms.TextInput(attrs=({'placeholder':'Write one Fact..'})),
+            'number':forms.NumberInput(attrs=({'placeholder':'Choose one number'})),
+        }
 
 class TypeWriterForm(forms.ModelForm):
     class Meta:

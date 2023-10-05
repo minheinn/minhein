@@ -290,6 +290,14 @@
         </a>
       </li><!-- End About Nav -->
 
+      {% url 'fact' as url %}
+      <li class="nav-item {% if request.path == url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'fact' %}">
+          <i class="bi bi-postcard-heart"></i>
+          <span>Facts</span>
+        </a>
+      </li><!-- End About Nav -->
+
       {% url 'type-writer' as url %}
       <li class="nav-item {% if request.path == url %}active{% endif %}">
         <a class="nav-link" href="{% url 'type-writer' %}">
@@ -309,8 +317,23 @@
       {% url 'gallery' as url %} 
       <li class="nav-item {% if request.path == url %}active{% endif %}">
         <a class="nav-link" href="{% url 'gallery' %}">
-          <i class="bi bi-justify"></i>
+          <i class="bi bi-file-image"></i>
           <span>Gallery</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'gallery' %}">
+          <i class="bi bi-handbag"></i>
+          <span>Services</span>
+        </a>
+      </li>
+      
+      {% url 'contact' as url %} 
+      <li class="nav-item {% if request.path == url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'contact' %}">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Contact</span>
         </a>
       </li><!-- End Gallery nav -->
 

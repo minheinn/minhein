@@ -41,6 +41,42 @@ def aboutDelete(request, slug):
     context = {'about':about}
     return render(request, 'dashboard/about/delete.html', context)
 
+## Facts 
+def fact(request):
+    page = "fact"
+    facts = Fact.objects.all()
+    forms = FactForm()
+    if request.method == "POST":
+        form = FactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Has been added successfully!')
+            return redirect('fact')
+    context = {'page':page,'facts':facts, 'forms':forms}
+    return render(request, 'dashboard/fact/fact.html', context)
+
+def fact_edit(request, slug):
+    facts = Fact.objects.all()
+    fact = Fact.objects.get(slug=slug)
+    forms = FactForm(instance=fact)
+    if request.method == "POST":
+        form = FactForm(request.POST, instance=fact)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "{} has been updated successfully!".format(fact.fact))
+            return redirect('fact')
+    context = {'facts':facts, 'fact':fact, 'forms':forms}
+    return render(request, 'dashboard/fact/fact.html', context)
+
+def fact_delete(request, slug):
+    fact = Fact.objects.get(slug=slug)
+    if request.method == "POST":
+        fact.delete()
+        messages.error(request, '{} has been deleted successfully!'.format(fact.fact))
+        return redirect('fact')       
+    context = {'fact':fact}
+    return render(request, 'dashboard/fact/delete.html', context)
+
 ## type_writer started
 def type_writer(request):
     page = "type_writer"
@@ -189,3 +225,9 @@ def gallery_delete(request, slug):
         return redirect('gallery')
     context = {'gallery':gallery}
     return render(request, 'dashboard/gallery/delete.html', context)
+
+## for Contact
+def contact(request):
+    contacts = Contact.objects.all()
+    context = {'contacts':contacts}
+    return render(request, 'dashboard/contact/contact.html', context)
